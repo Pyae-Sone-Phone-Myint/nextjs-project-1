@@ -3,6 +3,7 @@ import ResultsTitle from "@/components/events/results-title";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { getFilteredEvents } from "@/helpers/api-util";
+import Head from "next/head";
 // import { getFilteredEvents } from "@/dummy-data";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -34,8 +35,23 @@ export default function FilteredEventPage(props) {
     }
   }, [data]);
 
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
+
   if (!loadedEvents || !filterData) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className="center">Loading...</p>;
+      </>
+    );
   }
 
   const filteredYear = filterData[0];
@@ -63,6 +79,7 @@ export default function FilteredEventPage(props) {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -76,6 +93,7 @@ export default function FilteredEventPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>

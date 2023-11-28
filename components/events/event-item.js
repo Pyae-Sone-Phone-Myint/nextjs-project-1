@@ -3,6 +3,7 @@ import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import Image from "next/image";
 
 export default function EventItem(props) {
   const { title, date, image, id, location } = props;
@@ -15,10 +16,10 @@ export default function EventItem(props) {
   const addressFormatter = location.replace(", ", "\n");
   const exploreLink = `/events/${id}`;
   return (
-    <li className={classes.item} >
-      <img src={"/" + image} alt={title} />
-      <div>
-        <div className={classes.content}>
+    <li className={classes.item}>
+      <Image src={"/" + image} alt={title} width={250} height={160} priority/>
+      <div className={classes.content}>
+        <div className={classes.summary}>
           <h2>{title}</h2>
           <div className={classes.date}>
             <DateIcon />

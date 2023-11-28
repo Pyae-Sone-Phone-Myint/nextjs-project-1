@@ -7,6 +7,7 @@ import EventContent from "@/components/event-detail/event-content";
 import ErrorAlert from "@/components/ui/error-alert";
 import Button from "@/components/ui/button";
 import { getAllEvents, getEventById, getFeaturedEvents } from "@/helpers/api-util";
+import Head from "next/head";
 
 export default function EventDetailPage({ selectedEvent }) {
   // const router = useRouter();
@@ -27,6 +28,13 @@ export default function EventDetailPage({ selectedEvent }) {
   }
   return (
     <Fragment>
+      <Head>
+        <title>{selectedEvent.title}</title>
+        <meta
+          name="description"
+          content="Find a lot of great events that allow you to evolve..."
+        />
+      </Head>
       <EventSummary title={selectedEvent.title} />
       <EventLogistics
         date={selectedEvent.date}
